@@ -51,27 +51,41 @@ public class SpotifyRepository {
 
     public Album createAlbum(String title, String artistName) {
 
-        Artist artist=null;
-        for(Artist a: artists)
-        {
-            if(a.getName().equals(artistName))
-            {
-               artist=a;
-               break;
+        Artist artist1 = null;
+        for(Artist artist : artists) {
+            if (Objects.equals(artist.getName(), artistName)) {
+                artist1 = artist;
+                break;
             }
         }
-        if(artist==null)
-        {
-            artist=this.createArtist(artistName);
-            artists.add(artist);
+        if(artist1 == null){
+            artist1 = createArtist(artistName);
+
+            Album newAlbum = new Album(title);
+            newAlbum.setReleaseDate(new Date());
+
+            albums.add(newAlbum);
+
+            List<Album> list = new ArrayList<>();
+            list.add(newAlbum);
+
+            artistAlbumMap.put(artist1,list);
+            return newAlbum;
         }
-        Album album=new Album(title);
-        album.setReleaseDate(new Date());
-        albums.add(album);
+        else{
+            Album newAlbum = new Album(title);
+            newAlbum.setReleaseDate(new Date());
 
-        artistAlbumMap.put(artist,albums);
-        return album;
+            albums.add(newAlbum);
 
+            List<Album> list = new ArrayList<>();
+            if(list == null){
+                list = new ArrayList<>();
+            }
+            list.add(newAlbum);
+            artistAlbumMap.put(artist1,list);
+            return newAlbum;
+        }
 
 
     }
@@ -92,13 +106,18 @@ public class SpotifyRepository {
         }
         Song song=new Song(title,length);
         songs.add(song);
-        List<Song> songList=new ArrayList<>();
+
         if(albumSongMap.containsKey(album))
         {
-            songList=albumSongMap.get(album);
+            List<Song> songList=albumSongMap.get(album);
+            songList.add(song);
+            albumSongMap.put(album,songList);
         }
-        songList.add(song);
-        albumSongMap.put(album,songList);
+        else {
+            List<Song> songList=new ArrayList<>();
+            songList.add(song);
+            albumSongMap.put(album,songList);
+        }
         return song;
 
 
@@ -137,13 +156,19 @@ public class SpotifyRepository {
         playlistListenerMap.put(playlist,userList);
         creatorPlaylistMap.put(user,playlist);
 
-        List<Playlist> playlist1=new ArrayList<>();
+
         if(userPlaylistMap.containsKey(user))
         {
-            playlist1=userPlaylistMap.get(user);
+            List<Playlist> playlist1=userPlaylistMap.get(user);
+            playlist1.add(playlist);
+            userPlaylistMap.put(user,playlist1);
         }
-        playlist1.add(playlist);
-        userPlaylistMap.put(user,playlist1);
+        else
+        {
+            List<Playlist> playlist1=new ArrayList<>()
+             playlist1.add(playlist);
+             userPlaylistMap.put(user,playlist1);
+        }
 
         return playlist;
 
@@ -192,13 +217,19 @@ public class SpotifyRepository {
 
         creatorPlaylistMap.put(user,playlist);
 
-        List<Playlist> playlist1=new ArrayList<>();
+
         if(userPlaylistMap.containsKey(user))
         {
-            playlist1=userPlaylistMap.get(user);
+            List<Playlist> playlist1=userPlaylistMap.get(user);
+            playlist1.add(playlist);
+            userPlaylistMap.put(user,playlist1);
         }
-        playlist1.add(playlist);
-        userPlaylistMap.put(user,playlist1);
+        else
+        {
+            List<Playlist> playlist1=new ArrayList<>();
+            playlist1.add(playlist);
+            userPlaylistMap.put(user,playlist1);
+        }
 
         return playlist;
 
@@ -210,7 +241,7 @@ public class SpotifyRepository {
         User user=null;
         for(User u: users)
         {
-            if(user.getMobile().equals(mobile))
+            if(u.getMobile().equals(mobile))
             {
                 user=u;
             }
