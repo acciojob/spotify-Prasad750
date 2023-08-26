@@ -170,16 +170,14 @@ public class SpotifyRepository {
 
         List<Song> listOnTitles=new ArrayList<>();
 
-        for(String t1 :songTitles)
-        {
+
             for(Song s :songs)
             {
-                if(s.getTitle().equals(t1))
+                if(songTitles.contains(s.getTitle()0))
                 {
                     listOnTitles.add(s);
                 }
             }
-        }
 
         playlistSongMap.put(playlist,listOnTitles);
 
@@ -205,7 +203,18 @@ public class SpotifyRepository {
     }
 
     public Playlist findPlaylist(String mobile, String playlistTitle) throws Exception {
-
+        User user=null;
+        for(User u: users)
+        {
+            if(user.getMobile().equals(mobile))
+            {
+                user=u;
+            }
+        }
+        if (user==null)
+        {
+            throw new Exception("User does not exist");
+        }
         Playlist playlist=null;
         for(Playlist p:playlists)
         {
@@ -219,18 +228,7 @@ public class SpotifyRepository {
             throw new Exception("Playlist does not exist");
         }
 
-        User user=null;
-        for(User u: users)
-        {
-            if(user.getMobile().equals(mobile))
-            {
-                user=u;
-            }
-        }
-        if (user==null)
-        {
-            throw new Exception("User does not exist");
-        }
+
         if(creatorPlaylistMap.containsKey(user))
         {
             return playlist;
