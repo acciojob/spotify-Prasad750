@@ -173,7 +173,7 @@ public class SpotifyRepository {
 
             for(Song s :songs)
             {
-                if(songTitles.contains(s.getTitle()0))
+                if(songTitles.contains(s.getTitle()))
                 {
                     listOnTitles.add(s);
                 }
