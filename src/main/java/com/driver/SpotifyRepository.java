@@ -128,7 +128,7 @@ public class SpotifyRepository {
 
         for(User u:users)
         {
-            if(user.getMobile().equals(mobile))
+            if(user.getMobile()==mobile)
             {
                 user=u;
                 break;
@@ -182,7 +182,7 @@ public class SpotifyRepository {
 
         for(User u:users)
         {
-            if(user.getMobile().equals(mobile))
+            if(user.getMobile()==mobile)
             {
                 user=u;
                 break;
@@ -239,7 +239,7 @@ public class SpotifyRepository {
         User user=null;
         for(User u: users)
         {
-            if(u.getMobile().equals(mobile))
+            if(u.getMobile()==mobile)
             {
                 user=u;
             }
@@ -251,7 +251,7 @@ public class SpotifyRepository {
         Playlist playlist=null;
         for(Playlist p:playlists)
         {
-            if(p.getTitle().equals(playlistTitle))
+            if(p.getTitle()==playlistTitle)
             {
                 playlist=p;
                 break;
@@ -294,7 +294,7 @@ public class SpotifyRepository {
         User user=null;
         for(User u:users)
         {
-            if(u.getMobile().equals(mobile))
+            if(u.getMobile()==mobile)
             {
                 user=u;
                 break;
@@ -308,7 +308,7 @@ public class SpotifyRepository {
         Song song=null;
         for(Song s:songs)
         {
-            if(s.getTitle().equals(songTitle))
+            if(s.getTitle()==songTitle)
             {
                 song=s;
                 break;
