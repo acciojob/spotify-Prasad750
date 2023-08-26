@@ -265,6 +265,7 @@ public class SpotifyRepository {
             if(u.getMobile().equals(mobile))
             {
                 user=u;
+                break;
             }
         }
         if(user==null)
@@ -278,6 +279,7 @@ public class SpotifyRepository {
             if(s.getTitle().equals(songTitle))
             {
                 song=s;
+                break;
             }
         }
         if(song==null)
