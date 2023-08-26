@@ -301,6 +301,38 @@ public class SpotifyRepository {
         }
         else {
            userList = new ArrayList<>();
+            int likes= song.getLikes()+1;
+            song.setLikes(likes);
+            userList.add(user);
+            songLikeMap.put(song,userList);
+
+
+
+            Album album=null;
+            for(Album a:albumSongMap.keySet())
+            {
+                List<Song> songList=albumSongMap.get(a);
+                if(songList.contains(song))
+                {
+                    album=a;
+                    break;
+                }
+
+            }
+            Artist artist=null;
+            for(Artist a : artistAlbumMap.keySet())
+            {
+                List<Album> albumList=artistAlbumMap.get(a);
+                if(albumList.contains(album))
+                {
+                    artist=a;
+                    break;
+                }
+            }
+            int likes1=artist.getLikes()+1;
+            artist.setLikes(likes);
+            artists.add(artist);
+            return song;
         }
 
 
