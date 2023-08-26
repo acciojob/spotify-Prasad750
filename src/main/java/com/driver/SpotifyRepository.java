@@ -165,7 +165,7 @@ public class SpotifyRepository {
         }
         else
         {
-            List<Playlist> playlist1=new ArrayList<>()
+            List<Playlist> playlist1=new ArrayList<>();
              playlist1.add(playlist);
              userPlaylistMap.put(user,playlist1);
         }
