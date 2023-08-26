@@ -332,7 +332,7 @@ public class SpotifyRepository {
                     break;
                 }
             }
-            likes=artist.getLikes()+1;
+            int likes1=artist.getLikes()+1;
             artist.setLikes(likes);
             artists.add(artist);
             return song;
